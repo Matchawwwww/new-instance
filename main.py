@@ -280,10 +280,16 @@ def home():
     url = requests.get('https://raw.githubusercontent.com/mochidukiyukimi/yuki-youtube-instance/main/instance.txt').text.rstrip()
     invidious_api = InvidiousAPI()
 
+@app.get("/api/update")
+def updateAPI():
+    global invidious_api
+    invidious_api = InvidiousAPI()
+
+
 @app.exception_handler(500)
 def page(request: Request, __):
-    return template("APIwait.html", {"request": request}, status_code=500)
+    return template("error500.html", {"request": request}, status_code=500)
 
 @app.exception_handler(APItimeoutError)
 def APIwait(request: Request, exception: APItimeoutError):
-    return template("APIwait.html", {"request": request}, status_code=500)
+    return template("APItimeout.html", {"request": request}, status_code=500)
