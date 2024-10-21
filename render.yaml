@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: new-instance
+    name: new-instance-alpha-api
     env: python
     region: Oregon
     plan: free
